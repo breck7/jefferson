@@ -1,0 +1,43 @@
+grammar
+ name jefferson
+ description A prototype language for a human readable, mathematically minimal, strongly typed language for writing laws/governments/constitutions.
+ catchAllNodeType errorNode
+ nodeTypes
+  preamble
+  article
+cellType englishWord
+ highlightScope string
+cellType int
+ highlightScope constant.numeric.integer
+cellType organizationName
+ highlightScope entity.name.label
+cellType parentOrganizationName
+cellType personName
+cellType powerName
+cellType state
+cellType president personName
+cellType senatorName personName
+abstract clause
+nodeType article
+ nodeTypes
+  section
+ cells int
+nodeType assignmentOfPower
+ cells organizationName powerName
+nodeType description
+ description English description of entity.
+ catchAllCellType englishWord
+nodeType errorNode
+nodeType newOrganization
+ description A clause establishing a new organization
+ cells organizationName parentOrganizationName
+nodeType newPower
+ cells powerName
+ nodeTypes
+  description
+nodeType preamble
+ catchAllCellType englishWord
+nodeType section
+ nodeTypes
+  clause
+ cells int
