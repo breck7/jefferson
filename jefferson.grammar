@@ -1,56 +1,66 @@
-nodeType jefferson
+jeffersonNode
  root
  description A prototype language for a human readable, mathematically minimal, strongly typed language for writing laws/governments/constitutions.
  catchAllNodeType errorNode
- inScope preamble article
-cellType englishWord
+ inScope preambleNode articleNode
+englishWordCell
  highlightScope string
-cellType int
+intCell
  highlightScope constant.numeric.integer
-cellType organizationName
- highlightScope entity.name.label
-cellType parentOrganizationName
-cellType personName
-cellType powerName
-cellType keywordCell
+personNameCell
+keywordCell
  highlightScope keyword
-cellType state
-cellType president
+organizationNameCell
+ extends englishWordCell
+parentOrganizationNameCell
+ extends organizationNameCell
+powerNameCell
+ extends keywordCell
+stateCell
+presidentCell
  extends personName
-cellType senatorName
+senatorNameCell
  extends personName
-nodeType keyword
- firstCellType keywordCell
+abstractKeywordNode
+ cells keywordCell
  abstract
-nodeType clause
+abstractClauseNode
  abstract
- extends keyword
-nodeType article
- inScope section
- cells int
- extends keyword
-nodeType assignmentOfPower
- cells organizationName powerName
- match assignPowerTo
- extends clause
-nodeType description
+ extends abstractKeywordNode
+articleNode
+ crux article
+ inScope sectionNode
+ cells keywordCell intCell
+ extends abstractKeywordNode
+assignmentOfPowerNode
+ crux assignmentOfPower
+ cells keywordCell organizationNameCell powerNameCell
+ crux assignPowerTo
+ extends abstractClauseNode
+descriptionNode
  description English description of entity.
- catchAllCellType englishWord
- extends keyword
-nodeType errorNode
-nodeType newOrganization
+ catchAllCellType englishWordCell
+ crux description
+ extends abstractKeywordNode
+errorNode
+newOrganizationNode
  description A clause establishing a new organization
- cells organizationName
- catchAllCellType parentOrganizationName
- extends clause
-nodeType newPower
- cells powerName
- inScope description
- extends clause
-nodeType preamble
- catchAllCellType englishWord
- extends keyword
-nodeType section
- inScope clause
- cells int
- extends keyword
+ cells keywordCell organizationNameCell
+ catchAllCellType parentOrganizationNameCell
+ crux newOrganization
+ extends abstractClauseNode
+newPowerNode
+ cells keywordCell powerNameCell
+ crux newPower
+ inScope descriptionNode
+ extends abstractClauseNode
+preambleNode
+ cells keywordCell
+ crux preamble
+ catchAllCellType englishWordCell
+ extends abstractKeywordNode
+sectionNode
+ inScope abstractClauseNode
+ crux section
+ cells keywordCell intCell
+ extends abstractKeywordNode
